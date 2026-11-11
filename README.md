@@ -1,4 +1,5 @@
 Claude Code Skill: Audit Skills
+
 A powerful compliance, security, and optimization auditor for your Claude Code skills. This tool evaluates your .claude/skills directory against the official Agent Skills specification, enforces strict security boundaries, detects PII leaks, and provides interactive, step-by-step refactoring for any flagged issues.
 
 Features
