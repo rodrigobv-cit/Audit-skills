@@ -1,38 +1,44 @@
-# Claude Code Skill Auditor
 
-A specialized tool for Claude Code that automatically audits local `.claude/skills/` directories. It enforces the Agent Skills specification and scans for security vulnerabilities, PII leaks, and context-bloat issues.
+# Claude Code Skill: Audit Skills
+
+A powerful compliance, security, and optimization auditor for your Claude Code skills. This tool evaluates your `.claude/skills` directory against the official Agent Skills specification, enforces strict security boundaries, detects PII leaks, and provides interactive, step-by-step refactoring for any flagged issues.
+
+## Features
+
+- **Spec Compliance**: Ensures your skills adhere to the Agent Skills format (correct frontmatter, description length, allowed keys).
+- **Security & Sandboxing**: Detects overprivileged tools (e.g., bare `Bash`), raw network egress (`curl`/`wget`), and unguarded side effects requiring `disable-model-invocation: true`.
+- **PII & Secrets Engine**: Flags hardcoded absolute paths, exposed cloud credentials, and non-synthetic data in examples.
+- **Cost & Context Optimization**: Warns against unbounded dynamic loops and excessively large `SKILL.md` files.
+- **Interactive Refactoring**: Generates a detailed `audit-report.md` and walks you through fixing each flagged skill interactively via unified diffs.
 
 ## Installation
 
-Run the provided installation script to add the skill to your project:
+You can install this skill locally to your current project using the provided installation script.
 
-```bash
-chmod +x install.sh
-./install.sh
-```
+1. Make the installer script executable:
+   ```bash
+   chmod +x install.sh
+   ```
+2. Run the installer:
+   ```bash
+   ./install.sh
+   ```
 
 ## Usage
 
-Start Claude Code in your project repository:
-
+Start Claude Code in your terminal:
 ```bash
 claude
 ```
 
-To audit all skills in the project:
-```
+Run the audit across all skills in your repository:
+```text
 /audit-skills *
 ```
 
-To audit a specific skill:
-```
-/audit-skills <skill-name>
+Or target a specific skill by name:
+```text
+/audit-skills deploy-staging
 ```
 
-## Features
-- Validates frontmatter and Agent Skills spec compliance.
-- Detects unguarded side effects missing `disable-model-invocation: true`.
-- Flags absolute personal paths and unredacted secrets.
-- Prevents overprivileged tool requests (like bare `Bash`).
-- Interactively walks you through proposed fixes using standard Git diffs.
-- Outputs a complete summary report to `audit-report.md`.
+The auditor will analyze the target(s), write a detailed summary to `audit-report.md`, and prompt you to accept or skip any necessary security 
